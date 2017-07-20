@@ -257,6 +257,8 @@ provision_azure() {
     if [ ${rc} -eq 0 ]; then
         echo "Docker machine '$MACHINE_NAME' already exists"
     else
+        # Adding --engine-install-url work around for Docker-Machine 0.12.0, need to try 0.12.1
+        # across platforms, but it did not work in Linux.
         MACHINE_CREATE_CMD="docker-machine create \
                     --driver azure \
                     --azure-subscription-id ${AZURE_SUB_ID} \
